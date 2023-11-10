@@ -10,12 +10,12 @@
 ## About Laravel
 
 ## Accounts
-<!-- 
+
             name=> 'Admin User'
             'email' => 'admin@example.com'
-            'password' => '12345678' -->
+            'password' => '12345678'
 
 
-            <!-- name => 'Data Entry User'
+            name => 'Data Entry User'
             'email' => 'user@example.com'
-            'password' => '12345678' -->
+            'password' => '12345678'
