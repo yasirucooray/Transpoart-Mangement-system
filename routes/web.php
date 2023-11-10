@@ -24,12 +24,17 @@ Route::group(['middleware' => ['user_role']], function () {
 Route::get('/bus', [App\Http\Controllers\BusController::class, 'index'])->name('bus');
 Route::post('/bus/save', [App\Http\Controllers\BusController::class, 'store'])->name('bus.save');
 Route::get('/bus/create', [App\Http\Controllers\BusController::class, 'create'])->name('bus.create');
+Route::get('/bus/{id}/edit', [App\Http\Controllers\BusController::class, 'edit'])->name('bus.edit');
+Route::put('/bus/update', [App\Http\Controllers\BusController::class, 'update'])->name('bus.update');
+Route::delete('/bus/{id}/delete', [App\Http\Controllers\BusController::class, 'delete'])->name('bus.delete');
 
 //route
 Route::get('/route', [App\Http\Controllers\RouteController::class, 'index'])->name('route');
 Route::post('/route/create', [App\Http\Controllers\RouteController::class, 'store'])->name('rout.save');
 Route::get('/route/create', [App\Http\Controllers\RouteController::class, 'create'])->name('route.create');
-
+Route::get('/route/{id}/edit', [App\Http\Controllers\RouteController::class, 'edit'])->name('route.edit');
+Route::put('/route/update', [App\Http\Controllers\RouteController::class, 'update'])->name('route.update');
+Route::delete('/route/{id}/delete', [App\Http\Controllers\RouteController::class, 'delete'])->name('route.delete');
     //shedule
 Route::get('/shedule', [App\Http\Controllers\SheduleController::class, 'index'])->name('shedule');
 Route::post('/shedule/save', [App\Http\Controllers\SheduleController::class, 'store'])->name('shedule.save');

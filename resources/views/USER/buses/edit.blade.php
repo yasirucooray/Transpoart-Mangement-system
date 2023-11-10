@@ -59,20 +59,19 @@
                 Buses <i class="fa fa-caret-down"></i>
             </a>
             <div id="demoAcc" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-                <a href="{{ url('/bus') }}" class="w3-bar-item w3-button ">Buses List</a>
-                <a href="{{ url('/bus/create') }}" class="w3-bar-item w3-button">Add Buses</a>
+                <a href="{{ url('/bus') }}" class="w3-bar-item w3-button "> Buses List</a>
+                <a href="{{ url('/bus/create') }}" class="w3-bar-item w3-button w3-light-grey"><i
+                        class="fa fa-caret-right w3-margin-right"></i>Add Buses</a>
             </div>
             <a onclick="myAccFunc2()" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align"
-                id="myBtn">
+                id="myBtn2">
                 Routes <i class="fa fa-caret-down"></i>
             </a>
             <div id="demoAcc2" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-                <a href="{{ url('/route') }}" class="w3-bar-item w3-button w3-light-grey"><i
-                        class="fa fa-caret-right w3-margin-right"></i> Routes List</a>
+                <a href="{{ url('/route') }}" class="w3-bar-item w3-button"> Routes List</a>
                 <a href="{{ url('/route/create') }}" class="w3-bar-item w3-button">Add Routes</a>
             </div>
-            <a href="{{ url('/shedule') }}" class="w3-bar-item w3-button w3-light-grey"><i
-                    class="fa fa-caret-right w3-margin-right"></i>Shedule</a>
+            <a href="{{ url('/shedule') }}" class="w3-bar-item w3-button">Shedule</a>
             <a href="{{ url('/bus_shedule') }}" class="w3-bar-item w3-button">Bus Shedule</a>
             <a href="{{ url('/driver') }}" class="w3-bar-item w3-button">Drivers List</a>
             @if (Auth()->user()->user_role == 'admin')
@@ -113,15 +112,18 @@
 
 
 
-
         <!-- Subscribe section -->
         <div class="w3-container w3-gray w3-padding-32">
             <div class="w3-row-padding">
                 <div class="w3-col s12">
-                    <h4>Add New shedule</h4>
+                    <h4>Update Bus</h4>
 
-                    <form action="{{ url('shedule/save') }}" target="_blank" method="POST">
+                    <form action="{{ url('bus/update') }}" method="POST" target="_blank">
                         @csrf
+                        {{ method_field('put') }}
+                        <input type="hidden" name="id" value="{{ $bus->id }}">
+                        <p><input class="w3-input w3-border" type="text" placeholder="Bus Number" name="Name"
+                                value="{{ $bus->bus_no }}" required></p>
                         <p><select class="w3-input w3-border" aria-placeholder="select Route" name="route">
                                 @foreach ($route as $rout)
                                     <option class="w3-input w3-border" value={{ $rout->id }}>{{ $rout->name }}
@@ -131,12 +133,11 @@
                             </select>
 
                         </p>
-                        <p><input class="w3-input w3-border" type="time" placeholder="Departure Time" name="d_time"
-                                required></p>
-                        <p><input class="w3-input w3-border" type="time" placeholder="Arrival Time" name="a_time"
-                                required></p>
-
-                        <button type="submit" class="w3-button w3-block w3-black">Save</button>
+                        <p><input class="w3-input w3-border" type="text" placeholder="Owner Name"
+                                value="{{ $bus->infor->owner_name }}" name="owner_Name" required></p>
+                        <p><input class="w3-input w3-border" type="text" placeholder="phone"
+                                value="{{ $bus->infor->phone }}" name="phone" required></p>
+                        <button type="submit" class="w3-button w3-block w3-black">Update</button>
                     </form>
                 </div>
             </div>
@@ -190,6 +191,7 @@
             document.getElementById("myOverlay").style.display = "none";
         }
     </script>
+
     <script>
         // Accordion
         function myAccFunc2() {

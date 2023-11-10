@@ -41,7 +41,15 @@ class BusController extends Controller
             'route' =>  $route,
         ])->render();
     }
-
+    public function edit($id)
+    {
+        $route = Route::all();
+        $bus = Bus::find($id);
+        return view('USER.buses.edit', [
+            'route' =>  $route,
+            'bus' =>  $bus,
+        ])->render();
+    }
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -60,5 +68,32 @@ class BusController extends Controller
         $details->save();
 
          return redirect()->back();
+    }
+    public function update(Request $request)
+    {
+        $this->validate($request, [
+            'Name' => 'required',
+        ]);
+
+        $bus = Bus::find($request->id);
+        $bus->bus_no = $request->Name;
+        $bus->route_id = $request->route;
+        $bus->update();
+
+
+        $details = BusDetail::where('bus_id',$request->id)->first();
+        $details->bus_id = $request->id;
+        $details->owner_name =$request->owner_Name;
+        $details->phone =$request->phone;
+        $details->update();
+
+         return redirect()->back();
+    }
+
+    public function delete($id)
+    {
+        $routes = Bus::find($id);
+       $routes->delete();
+       return redirect()->back();
     }
 }
